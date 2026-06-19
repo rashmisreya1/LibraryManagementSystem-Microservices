@@ -1,0 +1,159 @@
+﻿@model LibraryManagement.Web.Models.DashboardStatsViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}   
+
+<div class="text-center mb-5">
+
+    <h1 class="display-4">📚 Library Management System</h1>
+
+    <p class="lead">
+        Manage books and users with ASP.NET Core MVC, Web API, Entity Framework, and SQL Server.
+    </p>
+
+</div>
+
+<div class="row mb-5">
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📚 Total Books</h3>
+
+                <h1>@Model.TotalBooks</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-success shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📦 Total Copies</h3>
+
+                <h1>@Model.TotalCopies</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-warning shadow">
+
+            <div class="card-body text-center">
+
+                <h3>👥 Total Users</h3>
+
+                <h1>@Model.TotalUsers</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-info shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🔄 Active Borrowings</h3>
+
+                <h1>@Model.ActiveBorrowings</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>📖 Books</h3>
+
+                <p>
+                    View, edit and delete books from the library.
+                </p>
+
+                <a asp-controller="Books"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    Open Books
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>➕ Add Book</h3>
+
+                <p>
+                    Add new books to the library database.
+                </p>
+
+                <a asp-controller="Books"
+                   asp-action="Add"
+                   class="btn btn-success">
+                    Add Book
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>🔐 Login</h3>
+
+                <p>
+                    Access the authentication module.
+                </p>
+
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="btn btn-warning">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

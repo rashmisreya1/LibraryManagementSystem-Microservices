@@ -1,0 +1,12 @@
+bin/
+obj/
+Logs/
+node_modules/
+
+.vs/
+.vscode/
+
+*.user
+*.suo
+
+*.db

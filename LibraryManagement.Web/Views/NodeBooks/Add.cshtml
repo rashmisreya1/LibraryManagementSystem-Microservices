@@ -1,0 +1,37 @@
+@model LibraryManagement.Web.Models.BookViewModel
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<h1 class="mb-4">➕ Add Book</h1>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Author</label>
+        <input asp-for="Author" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Available Copies</label>
+        <input asp-for="AvailableCopies"
+               class="form-control" />
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Save
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

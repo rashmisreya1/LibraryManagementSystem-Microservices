@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Choose Portal";
+}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4 mb-5">
+        📚 Library Management System
+    </h1>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow p-4">
+
+                <h2>⚙️ .NET Portal</h2>
+
+                <p>
+                    Access the ASP.NET Core implementation.
+                </p>
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    Open .NET Portal
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow p-4">
+
+                <h2>🟢 NodeJS Portal</h2>
+
+                <p>
+                    Access the NodeJS implementation.
+                </p>
+
+                <a asp-controller="NodeBooks"
+                    asp-action="Dashboard"
+                    class="btn btn-success">
+                    Open NodeJS Portal
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,17 @@
+POST http://localhost:5213/api/auth/signup
+Content-Type: application/json
+
+{
+    "name": "Rashmi",
+    "email": "rashmi@test.com",
+    "password": "123"
+}
+
+###
+POST http://localhost:5213/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "rashmi@test.com",
+    "password": "123"
+}

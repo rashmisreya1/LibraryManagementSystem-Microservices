@@ -1,0 +1,163 @@
+@model LibraryManagement.Web.Models.NodeDashboardViewModel
+
+@{
+    ViewData["Title"] = "NodeJS Dashboard";
+}
+
+<div class="text-center mb-5">
+
+    <h1 class="display-4">🟢 NodeJS Library Management System</h1>
+
+    <p class="lead">
+        Library Management using NodeJS, Express, SQL Server and MVC Frontend.
+    </p>
+
+</div>
+
+<div class="row mb-5">
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-success shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📚 Total Books</h3>
+
+                <h1>@Model.TotalBooks</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📦 Total Copies</h3>
+
+                <h1>@Model.TotalCopies</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-warning shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📜 History Records</h3>
+
+                <h1>@Model.HistoryCount</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card border-info shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📖 Active Borrowings</h3>
+
+                <h1>@Model.ActiveBorrowings</h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>📚 Books</h3>
+
+                <a asp-action="Index"
+                   class="btn btn-primary">
+                    Open Books
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>➕ Add Book</h3>
+
+                <a asp-action="Add"
+                   class="btn btn-success">
+                    Add Book
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>📜 History</h3>
+
+                <a asp-action="History"
+                   class="btn btn-warning">
+                    View History
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                <h3>📖 Active</h3>
+
+                <a asp-action="ActiveBorrowings"
+                   class="btn btn-info">
+                    View Active
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

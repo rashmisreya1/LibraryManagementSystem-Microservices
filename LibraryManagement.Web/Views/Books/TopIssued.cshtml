@@ -1,0 +1,22 @@
+@model List<LibraryManagement.Web.Models.TopIssuedBookViewModel>
+
+<h2>🏆 Top Issued Books</h2>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Book Id</th>
+            <th>Issue Count</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.BookId</td>
+            <td>@book.IssueCount</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+@model List<LibraryManagement.Web.Models.IssueRecordViewModel>
+
+<h2>📜 Borrowing History</h2>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Book Id</th>
+            <th>User Id</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var record in Model)
+    {
+        <tr>
+            <td>@record.Id</td>
+            <td>@record.BookId</td>
+            <td>@record.UserId</td>
+            <td>@record.IssueDate</td>
+            <td>@record.ReturnDate</td>
+        </tr>
+    }
+    </tbody>
+</table>
