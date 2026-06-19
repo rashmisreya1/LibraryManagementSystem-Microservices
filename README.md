@@ -1,0 +1,139 @@
+# 📚 Library Management System - Microservices
+
+## Overview
+
+This project is a microservices-based Library Management System developed during an internship to explore application monitoring and distributed system concepts. The primary objective of the project was not merely to build a CRUD-based library application, but to use it as a platform for simulating real-world service interactions and studying how multiple components communicate in a distributed environment. The application provided an opportunity to experiment with service orchestration, asynchronous messaging, caching mechanisms, background processing, and multi-level API communication patterns.
+
+The system was implemented using both ASP.NET Core and Node.js, thereby demonstrating interoperability between different backend technologies while maintaining a common database. Throughout the development process, emphasis was placed on understanding backend architecture, monitoring concepts, and scalable service design rather than focusing solely on application features.
+
+---
+
+# Architecture
+
+The solution consists of several independent services, each responsible for a specific part of the application. The services communicate with one another through HTTP-based APIs and message queues, thereby simulating a microservices environment.
+
+The .NET portion of the application contains Books API, Auth API, Users API, Inventory API, Notification API, Gateway API, and a Notification Worker Service. In addition to these services, a web application built using ASP.NET MVC acts as the frontend layer. Separate Node.js APIs for books, users, and authentication were also implemented in order to demonstrate how multiple backend technologies can coexist while sharing the same database.
+
+<img width="381" height="467" alt="image" src="https://github.com/user-attachments/assets/9306290e-55f3-4c6d-a888-61fb6e350fd7" />
+
+
+---
+
+# Technologies Used
+
+The project was developed primarily using ASP.NET Core Web APIs and Node.js. Entity Framework Core was used as the Object Relational Mapper for interacting with SQL Server, which served as the central database for the application. Redis was incorporated to introduce caching and improve performance for frequently requested data. RabbitMQ was used to implement asynchronous communication between services, while Docker containers were employed to host Redis and RabbitMQ instances.
+
+Different logging frameworks including Serilog, NLog, and Log4Net were explored to understand various approaches to application logging and diagnostics. Background Worker Services were used to process messages from RabbitMQ queues. Communication between services was implemented using HttpClient, thereby enabling the creation of multi-level API chains.
+
+---
+
+# Application Features
+
+The Library Management System provides facilities for user registration and authentication, book management, search operations, issuing and returning books, maintaining borrowing history, viewing active borrowings, and identifying the most frequently issued books. A dashboard was implemented to display important statistics such as the total number of books available, total copies present in the library, and currently active borrowings.
+
+The web application was designed in such a manner that users could interact with either the .NET backend or the Node.js backend, thereby demonstrating equivalent implementations using different technologies.
+
+<img width="1912" height="842" alt="image" src="https://github.com/user-attachments/assets/2e486d67-6d7b-408b-ab27-e449004a1a12" />
+
+<img width="1907" height="887" alt="image" src="https://github.com/user-attachments/assets/522c8755-092f-4b34-b00f-0e88892b0b30" />
+
+---
+
+# Redis Integration
+
+Redis caching was introduced to improve performance and reduce unnecessary database access. Frequently requested information such as search results, authors, individual book information, active borrowings, and statistics regarding the most issued books were stored inside Redis. This helped reduce repeated database queries and provided faster response times. The implementation also served as an introduction to distributed caching concepts commonly used in scalable applications.
+
+
+<img width="798" height="126" alt="image" src="https://github.com/user-attachments/assets/e0106c07-3957-475d-8227-992452652e17" />
+<img width="1482" height="245" alt="image" src="https://github.com/user-attachments/assets/5a7a348a-1a1f-4a79-a7cb-a6577bac7f3f" />
+
+---
+
+# RabbitMQ Integration
+
+RabbitMQ was incorporated to study asynchronous communication patterns. Whenever a book was issued or returned, messages were published to RabbitMQ queues instead of directly handling all processing within the same request. This approach demonstrated how producer-consumer architectures are used to decouple different parts of an application.
+
+Separate queues were created for book issue notifications, return notifications, and user registration events. Messages generated by the APIs were consumed by a dedicated worker service, thereby simulating background notification processing. This architecture provided exposure to event-driven communication and messaging systems used in modern distributed applications.
+
+<img width="1898" height="893" alt="image" src="https://github.com/user-attachments/assets/387325c7-da61-4b7c-98af-34da6f76097e" />
+
+---
+
+# Background Worker Service
+
+A dedicated Notification Service was implemented using .NET Worker Services. The service continuously listened for messages arriving in RabbitMQ queues and processed them independently from the APIs. This demonstrated how long-running background tasks can be separated from request-processing services, thereby improving scalability and maintainability. The worker service successfully consumed issue notifications, return notifications, and user registration events generated by different APIs.
+
+<img width="1083" height="370" alt="image" src="https://github.com/user-attachments/assets/fa63b354-3019-4b48-9117-e3c36408145d" />
+
+---
+
+# Logging
+
+Multiple logging frameworks were explored throughout the project to understand different approaches to application diagnostics. Serilog was used for structured file-based logging, while NLog and Log4Net were integrated to study alternative logging mechanisms. The inclusion of these frameworks provided valuable insight into how enterprise applications monitor and troubleshoot runtime behavior.
+
+---
+
+# Docker Usage
+
+Docker containers were employed to host Redis and RabbitMQ services. Containerization simplified the setup process and eliminated the need for installing these components directly on the host system. Using Docker also provided exposure to container-based development practices that are widely adopted in modern software engineering environments.
+
+<img width="1918" height="1010" alt="image" src="https://github.com/user-attachments/assets/07adc657-b4af-4a8e-a5f4-5c621f3cd0d6" />
+
+---
+
+# Node.js Services
+
+In addition to the ASP.NET Core implementation, equivalent Node.js APIs were developed for authentication, books, and users. These services shared the same SQL Server database and demonstrated how different technologies can coexist within the same ecosystem. This helped in understanding interoperability and provided practical experience with both .NET and JavaScript-based backend development.
+
+<img width="327" height="117" alt="image" src="https://github.com/user-attachments/assets/c23cabd6-830d-4e80-afe8-414c267aeede" />
+
+---
+
+# API Gateway
+
+A dedicated Gateway API was introduced to act as the entry point into the system. Instead of communicating directly with downstream services, requests could pass through the Gateway API, which subsequently forwarded them to appropriate services. This design reflected the API Gateway pattern commonly used in microservice architectures and provided insight into request routing and service abstraction.
+
+
+---
+
+# Multi-Level API Communication
+
+One of the primary objectives of the project was to study service-to-service communication. Different APIs were connected using HttpClient so that requests could traverse multiple layers before producing a final response. These chains represented separate request flows and demonstrated how services can be reused across different scenarios.
+
+The first request flow consisted of the application communicating with the Gateway API, which subsequently interacted with Books API, Inventory API, and finally Notification API.
+
+The second request flow involved the application communicating with the Gateway API, followed by Auth API, Users API, and Notification API.
+
+The third request flow demonstrated service reuse by allowing requests to travel from the application to Books API, then Inventory API, followed by Users API, and finally Notification API.
+
+These chains simulated distributed communication patterns and highlighted how multiple services can collaborate to fulfill a single request.
+
+---
+
+# Project Structure
+
+The solution was organized into separate .NET and Node.js components. The .NET portion consisted of Books API, Auth API, Users API, Inventory API, Notification API, Gateway API, and Notification Worker Service. The Node.js portion contained APIs corresponding to books, users, and authentication. An ASP.NET MVC web application acted as the presentation layer and provided access to both implementations.
+
+This separation of responsibilities enabled modular development and allowed individual components to evolve independently while maintaining a common ecosystem.
+
+---
+
+# Concepts Explored
+
+Throughout the development of this project, practical exposure was gained in the areas of REST APIs, microservices architecture, API gateway patterns, service-to-service communication, distributed caching, asynchronous messaging, background processing, logging, containerization, and application monitoring concepts. The project served as an effective platform for understanding how modern backend systems are designed and how independent services collaborate in a distributed environment.
+
+<img width="1908" height="945" alt="image" src="https://github.com/user-attachments/assets/1e849d20-0283-44dd-8753-25f283086ca2" />
+
+<img width="1911" height="932" alt="image" src="https://github.com/user-attachments/assets/4e847d5c-dbb2-4f58-80b4-6bcce0d03dd0" />
+
+---
+
+# Future Enhancements
+
+The architecture provides a strong foundation for introducing more advanced concepts in the future. Potential improvements include implementing JWT-based authentication, integrating distributed tracing mechanisms, adding Prometheus and Grafana for metrics visualization, deploying services using Kubernetes, introducing API gateways such as YARP or Ocelot, and automating deployments through CI/CD pipelines.
+
+---
+
+# Acknowledgement
+
+This project was developed during an internship with the objective of understanding process monitoring and application monitoring concepts through hands-on experimentation. It provided valuable experience in backend development, distributed systems, caching, messaging architectures, containerization, and microservice communication patterns. The knowledge gained through the project contributed significantly to a deeper understanding of how modern software systems are designed and monitored.
